@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Carz - Available Cars</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #d4af37; /* Rich gold */
+  --secondary-color: #2c3e50;
+  --text-color: #f8f9fa;
+  --background-color: #0a0a0a;
+  --accent-color: #c0c0c0; /* Silver */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(44, 62, 80, 0.9));
+  color: var(--text-color);
+  padding: 10px 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 a {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+header h1 a:hover {
+  color: var(--accent-color);
+}
+
+.logo {
+  width: 120px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.logo:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-right: 30px;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-align: center;
+  margin: 40px 0;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.brand-section {
+  margin-bottom: 50px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.brand-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.brand-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.car-card {
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 25px;
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+}
+
+.car-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.car-details {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--accent-color);
+}
+
+.car-image-container {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.car-card:hover .car-image {
+  transform: scale(1.05);
+}
+
+.view-details-btn {
+  margin-top: 25px;
+  padding: 12px 30px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.view-details-btn:hover {
+  background-color: #b8860b;
+  transform: translateY(-2px);
+}
+
+footer {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 2rem 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
+  font-weight: 300;
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.brand-section, .car-card {
+  animation: fadeIn 1s ease-out;
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 3s ease; /* Fade-out effect */
+}
+
+.preloader.hide {
+  opacity: 0; /* Set opacity to 0 when hiding */
+  pointer-events: none; /* Disable interactions */
+}
+
+.preloader img {
+  width: 150px;
+}
+
+.search-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .search-input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid var(--primary-color);
+      border-radius: 5px;
+      width: 300px; /* Adjust width as needed */
+      margin-right: 10px;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: var(--background-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-button:hover {
+      background-color: #b8860b;
+    }
+
+  .featured-cars {
+    padding: 50px 0;
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .featured-cars h2 {
+    text-align: center;
+    color: #d8af0b;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  .featured-cars-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    border-radius: 15px;
+
+  }
+
+  .featured-car-card {
+    display: flex;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10px;
+    margin-right: 50p;
+  }
+
+  .featured-car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .featured-car-image {
+    width: 40%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .featured-car-details {
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 200px;
+  }
+
+  .featured-car-title {
+    color: #d8af0b;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .featured-car-info {
+    color: #b0a4a4;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    
+  }
+
+  .featured-car-price {
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .featured-car-button {
+    display: inline-block;
+    background-color: #d8af0b;
+    color: #000000;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-start;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+
+  .featured-car-button:hover {
+    background-color: #907907;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .featured-car-card {
+      flex-direction: column;
+    }
+
+    .featured-car-image,
+    .featured-car-details {
+      width: 100%;
+    }
+
+    .featured-car-image {
+      height: 200px;
+    }
+  }
+
+  .main-content {
+    display: flex;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
+  .brand-sidebar {
+    width: 250px;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9));
+    border-radius: 15px;
+    margin-right: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 200px;
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+
+  .brand-sidebar:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .brand-sidebar h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+  }
+
+  #brand-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
+  #brand-list li {
+    margin-bottom: 12px;
+  }
+
+  #brand-list button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+
+  #brand-list button:hover,
+  #brand-list button.active {
+    color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+  }
+
+  .price-range {
+    margin-top: 20px;
+  }
+
+  #price-slider {
+    width: 100%;
+    margin-bottom: 15px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  #price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: 4px solid #333;
+    box-shadow: -407px 0 0 400px var(--primary-color);
+  }
+
+  .price-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+  }
+
+  #selected-price {
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  main {
+    flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+    }
+
+    .brand-sidebar {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 30px;
+      position: static;
+    }
+  }
+
+  .luxury-car {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  }
+
+  .luxury-badge {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    margin-top: 10px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Citizen Carz Logo" class="logo" />
+    <h1><a href="index.html">Citizen Carz</a></h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="services.html">Services</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="preloader">
+  <img src="logo.png" alt="Citizen Carz Logo">
+</div>
+
+<div class="main-content">
+  <aside class="brand-sidebar">
+    <h2>Brands</h2>
+    <ul id="brand-list">
+      <!-- Brand list will be populated by JavaScript -->
+    </ul>
+    <!-- Price range section removed -->
+  </aside>
+  <main>
+    <h1>Featured Cars</h1>
+    <div id="featured-cars-container"></div>
+    <!-- Search Bar -->
+    <div style="text-align: center; margin: 20px;">
+      <input type="text" id="search-bar" placeholder="Search for a car or brand..." style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid var(--primary-color);"/>
+    </div>
+    <h1>Available Cars</h1>
+    <div id="car-container"></div>
+  </main>
+</div>
+
+<footer>
+  <p>Follow us on: 
+      <a href="https://www.facebook.com/citizencarz/?checkpoint_src=any" target="_blank">Facebook</a> |
+      <a href="https://twitter.com" target="_blank">Twitter</a> |
+      <a href="https://www.instagram.com/citizencarz/?igsh=MWJoZGk2ZnVjNTBxbQ%3D%3D" target="_blank">Instagram</a>
+  </p>
+  <p>Contact us: <a href="mailto:haneefsait9966@gmail.com">haneefsait9966@gmail.com<br>7760666666</a></p>
+  <p>&copy; 2024 Citizen Carz. All rights reserved.</p>
+</footer>
+
+<script>
+617553868
+function filterCars() {
+  const searchInput = document.getElementById('search-bar').value.toLowerCase();
+  const featuredContainer = document.getElementById('featured-cars-container');
+  const carContainer = document.getElementById('car-container');
+
+  // Show all car sections initially
+  if (searchInput === '') {
+    featuredContainer.style.display = ''; // Show featured cars
+    const availableCars = Array.from(carContainer.children);
+    availableCars.forEach(brandSection => {
+      brandSection.style.display = ''; // Show all brand sections
+      const carCards = Array.from(brandSection.querySelectorAll('.car-card'));
+      carCards.forEach(carCard => {
+        carCard.style.display = ''; // Show all car cards
+      });
+    });
+    return; // Exit the function
+  }
+
+  // Hide featured cars
+  const featuredCars = Array.from(featuredContainer.children);
+  const availableCars = Array.from(carContainer.children);
+
+  // Filter and hide featured cars that don't match the search
+  const filteredFeaturedCars = featuredCars.filter(carCard => {
+    const carTitle = carCard.querySelector('.car-title').textContent.toLowerCase();
+    return carTitle.includes(searchInput);
+  });
+
+  featuredContainer.style.display = filteredFeaturedCars.length ? '' : 'none';
+
+  // Filter and hide brand sections that don't match the search
+  availableCars.forEach(brandSection => {
+    const brandTitle = brandSection.querySelector('.brand-title').textContent.toLowerCase();
+    const carCards = Array.from(brandSection.querySelectorAll('.car-card'));
+    
+    const hasMatchingCar = carCards.some(carCard => {
+      const carTitle = carCard.querySelector('.car-title').textContent.toLowerCase();
+      return carTitle.includes(searchInput);
+    });
+
+    // Show or hide brand section based on matching cars
+    brandSection.style.display = hasMatchingCar || brandTitle.includes(searchInput) ? '' : 'none';
+
+    // Hide car cards that don't match the search
+    carCards.forEach(carCard => {
+      const carTitle = carCard.querySelector('.car-title').textContent.toLowerCase();
+      carCard.style.display = carTitle.includes(searchInput) ? '' : 'none';
+    });
+  });
+}
+
+
+  document.getElementById('search-bar').addEventListener('input', filterCars);
+
+
+function searchCars() {
+      const input = document.getElementById('search-input').value.toLowerCase();
+      const carCards = document.querySelectorAll('.car-card');
+      
+      carCards.forEach(card => {
+        const title = card.querySelector('.car-title').textContent.toLowerCase();
+        if (title.includes(input)) {
+          card.style.display = 'block'; // Show card if it matches
+        } else {
+          card.style.display = 'none'; // Hide card if it doesn't match
+        }
+      });
+    }
+  // Function to display featured cars
+  function displayFeaturedCars(cars) {
+    const featuredContainer = document.getElementById('featured-cars-container');
+    featuredContainer.innerHTML = ''; // Clear existing content
+
+    // Filter only the featured cars
+    const featuredCars = cars.filter(car => car.featured === true);
+
+    featuredCars.forEach((car, index) => {
+      const carCard = document.createElement('div');
+      carCard.classList.add('featured-car-card');
+
+      carCard.innerHTML = `
+        <img src="${car.imagePaths[0]}" alt="${car.make} ${car.model}" class="featured-car-image">
+        <div class="featured-car-details">
+          <h3 class="featured-car-title">${car.make} ${car.model} - ${car.variant}</h3>
+          <p class="featured-car-info">${car.year} | ${car.fuel_type} | ${car.driven}</p>
+          <p class="featured-car-price">${car.price}</p>
+          <a href="car_details.html?make=${encodeURIComponent(car.make)}&model=${encodeURIComponent(car.model)}&variant=${encodeURIComponent(car.variant)}" class="featured-car-button">View Details</a>
+        </div>
+      `;
+
+      // Alternate the layout for even-numbered cards
+      if (index % 2 !== 0) {
+        carCard.style.flexDirection = 'row-reverse';
+      }
+
+      featuredContainer.appendChild(carCard);
+    });
+  }
+
+  // Function to display available cars by brand
+  function displayCarsByBrand(cars) {
+    const carContainer = document.getElementById('car-container');
+    const brandList = document.getElementById('brand-list');
+    // Remove price slider related variables
+    const brands = {};
+ 
+    // Populate brands object with available cars
+    cars.forEach(car => {
+      if (!brands[car.make]) {
+        brands[car.make] = [];
+      }
+      brands[car.make].push(car);
+    });
+ 
+    // Get the list of brands with available cars
+    const availableBrands = Object.keys(brands);
+ 
+    // Sort brands alphabetically
+    availableBrands.sort((a, b) => a.localeCompare(b));
+ 
+    // Populate brand list
+    availableBrands.forEach(brand => {
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.textContent = brand;
+      button.onclick = () => {
+        const brandButtons = brandList.querySelectorAll('button');
+        brandButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        filterCars();
+      };
+      li.appendChild(button);
+      brandList.appendChild(li);
+    });
+ 
+    // Remove formatPrice function
+ 
+    // Remove price slider event listener
+ 
+    function filterCars() {
+      const selectedBrand = document.querySelector('#brand-list button.active')?.textContent || 'All Brands';
+      // Remove maxPrice variable
+      
+      carContainer.innerHTML = ''; // Clear existing content
+ 
+      if (selectedBrand === 'All Brands') {
+        availableBrands.forEach(brand => {
+          const filteredCars = brands[brand];
+          if (filteredCars.length > 0) {
+            carContainer.appendChild(createBrandSection(brand, filteredCars));
+          }
+        });
+      } else {
+        const filteredCars = brands[selectedBrand];
+        if (filteredCars.length > 0) {
+          carContainer.appendChild(createBrandSection(selectedBrand, filteredCars));
+        }
+      }
+    }
+
+    function createBrandSection(brand, filteredCars) {
+      const brandSection = document.createElement('div');
+      brandSection.classList.add('brand-section');
+
+      const brandTitle = document.createElement('h2');
+      brandTitle.classList.add('brand-title');
+      brandTitle.textContent = brand;
+      brandSection.appendChild(brandTitle);
+
+      const brandCardsContainer = document.createElement('div');
+      brandCardsContainer.classList.add('brand-cards-container');
+
+      // Sort cars to display luxury cars first
+      filteredCars.sort((a, b) => {
+        if (a.luxury && !b.luxury) return -1;
+        if (!a.luxury && b.luxury) return 1;
+        return 0;
+      });
+
+      filteredCars.forEach(car => {
+        const carCard = document.createElement('div');
+        carCard.classList.add('car-card');
+        if (car.luxury) carCard.classList.add('luxury-car');
+
+        if (car.imagePaths.length > 0) {
+          const carImageContainer = document.createElement('div');
+          carImageContainer.classList.add('car-image-container');
+          const img = document.createElement('img');
+          img.classList.add('car-image');
+          img.src = car.imagePaths[0];
+          img.alt = `${car.make} ${car.model}`;
+          carImageContainer.appendChild(img);
+          carCard.appendChild(carImageContainer);
+        }
+
+        const carTitle = document.createElement('div');
+        carTitle.classList.add('car-title');
+        carTitle.textContent = `${car.make} ${car.model} - ${car.variant}`;
+        carCard.appendChild(carTitle);
+
+        const carDetails = document.createElement('div');
+        carDetails.classList.add('car-details');
+        carDetails.innerHTML = `
+        <p><strong>Year:</strong> ${car.year}</p>
+          <p><strong>Driven:</strong> ${car.driven}</p>
+          <p><strong>Price:</strong> ${car.price}</p>
+        `;
+        carCard.appendChild(carDetails);
+
+        const viewDetailsBtn = document.createElement('button');
+        viewDetailsBtn.classList.add('view-details-btn');
+        viewDetailsBtn.textContent = 'View Details';
+        viewDetailsBtn.onclick = function () {
+          window.location.href = `car_details.html?make=${car.make}&model=${car.model}&variant=${car.variant}`;
+        };
+        carCard.appendChild(viewDetailsBtn);
+
+        if (car.luxury) {
+          const luxuryBadge = document.createElement('div');
+          luxuryBadge.classList.add('luxury-badge');
+          luxuryBadge.textContent = 'Luxury';
+          carCard.appendChild(luxuryBadge);
+        }
+
+        brandCardsContainer.appendChild(carCard);
+      });
+
+      brandSection.appendChild(brandCardsContainer);
+      return brandSection;
+    }
+
+    // Add an "All Brands" option at the top
+    const allBrandsLi = document.createElement('li');
+    const allBrandsButton = document.createElement('button');
+    allBrandsButton.textContent = 'All Brands';
+    allBrandsButton.onclick = () => {
+      const brandButtons = brandList.querySelectorAll('button');
+      brandButtons.forEach(btn => btn.classList.remove('active'));
+      allBrandsButton.classList.add('active');
+      filterCars();
+    };
+    allBrandsLi.appendChild(allBrandsButton);
+    brandList.insertBefore(allBrandsLi, brandList.firstChild);
+
+    // Activate "All Brands" by default
+    allBrandsButton.click();
+  }
+
+  // Fetch the car data from cars.json
+  fetch('cars.json')
+    .then(response => response.json())
+    .then(data => {
+      displayFeaturedCars(data); // Display featured cars
+      displayCarsByBrand(data);  // Display available cars
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+
+    window.addEventListener("load", function() {
+  const preloader = document.querySelector(".preloader");
+  
+  // Add class to start the fade-out transition
+  preloader.classList.add("hide");
+  
+  // Wait for the fade-out transition to complete before removing the preloader
+  setTimeout(function() {
+    preloader.style.display = "none"; // Remove the preloader from the page
+  }, 3000); // The timeout duration should match the transition duration (1 second in this case)
+});
+
+
+</script>
+
+</body>
+</html>

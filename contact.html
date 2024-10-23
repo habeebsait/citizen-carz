@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Carz - Contact Us</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+      --primary-color: #d4af37; /* Rich gold */
+      --secondary-color: #2c3e50;
+      --text-color: #f8f9fa;
+      --background-color: #0a0a0a;
+      --accent-color: #c0c0c0; /* Silver */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding-top: 120px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(44, 62, 80, 0.9));
+      color: var(--text-color);
+      padding: 10px 20px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 a {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+
+    header h1 a:hover {
+      color: var(--accent-color);
+    }
+
+    .logo {
+      width: 120px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 5px var(--primary-color));
+    }
+
+    .logo:hover {
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      margin-right: 30px;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    .contact-form, .alternative-contact {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 5px;
+      background-color: rgba(30, 30, 30, 0.7);
+      color: var(--text-color);
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    .submit-button {
+      background-color: var(--primary-color);
+      color: var(--background-color);
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #b8860b;
+      transform: translateY(-2px);
+    }
+
+    .contact-method {
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+
+    .contact-method a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-method a:hover {
+      color: var(--accent-color);
+    }
+
+    footer {
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 2rem 0;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s;
+      font-weight: 300;
+    }
+
+    footer a:hover {
+      color: var(--accent-color);
+    }
+
+    @media screen and (max-width: 768px) {
+      .contact-form, .alternative-contact {
+        padding: 1rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Citizen Carz Logo" class="logo" />
+        <h1><a href="index.html">Citizen Carz</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact-form">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-button">Send</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="alternative-contact">
+            <h3>Alternative Ways to Contact Us</h3>
+            <div class="contact-method">
+                <strong>Phone:</strong> <span>7760666666</span>
+            </div>
+            <div class="contact-method">
+                <strong>WhatsApp:</strong> <a href="https://wa.me/7760666666" target="_blank">Chat with us</a>
+            </div>
+            <div class="contact-method">
+                <strong>Address:</strong> <span>Bethel Church Bus Stop, AH45, Vayunandana Layout, Hebbal Kempapura, Bengaluru, Karnataka 560024, India</span>
+            </div>
+            <div class="contact-method">
+                <strong>Mail:</strong> <a href="mailto:haneefsait9966@gmail.com" target="_blank">haneefsait9966@gmail.com</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Follow us on: 
+            <a href="https://www.facebook.com/citizencarz/?checkpoint_src=any" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://www.instagram.com/citizencarz/?igsh=MWJoZGk2ZnVjNTBxbQ%3D%3D" target="_blank">Instagram</a>
+        </p>
+        <p>Contact us: <a href="mailto:haneefsait9966@gmail.com">haneefsait9966@gmail.com<br>7760666666</a></p>
+        <p>&copy; 2024 Citizen Carz. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+    
+            // Basic validation
+            if (!name || !email || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+    
+            // Send data to the server
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    // Reset the form
+                    document.getElementById('contact-form').reset();
+                } else {
+                    alert('Error sending message. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Carz - Car Details</title>
+    <style>
+        body {
+    letter-spacing: normal;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    background: linear-gradient(#000000, #4b4b4b, #2a2828);
+    margin: 0;
+    color: #b0a4a4;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* This makes the main content take up available space */
+}
+
+/* Header Styling */
+/* Header CSS */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(44, 62, 80, 0.9));
+  color: var(--text-color);
+  padding: 10px 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 a {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+header h1 a:hover {
+  color: var(--accent-color);
+}
+
+.logo {
+  width: 120px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.logo:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-right: 30px;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+/* Footer CSS */
+footer {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 2rem 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
+  font-weight: 300;
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
+
+/* Car Details Styling */
+.car-details {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 180px;
+    background-color: #373535;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #d8af0b;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.car-info p {
+    font-size: 1.2em;
+    margin: 5px 0;
+    font-weight: 300;
+}
+
+/* Buttons Container */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Back Button */
+.back-button, .contact-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-button {
+    background-color: #171401;
+    color: white;
+    border: none;
+    border-radius: 100px;
+}
+
+.back-button:hover {
+    background-color: #332901;
+}
+
+.contact-button {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #b89b0a;
+    border-radius: 100px;
+}
+
+.contact-button:hover {
+    background-color: #b89b0a;
+    color: #ffffff;
+}
+
+/* Image Gallery */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer; /* Add a pointer cursor for better UX */
+    transition: transform 0.3s; /* Smooth transition on hover */
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05); /* Slightly enlarge the image on hover */
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+    height:auto;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .column {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .column {
+        width: 90%;
+    }
+}
+
+    </style>
+    <style>
+        :root {
+          --primary-color: #d4af37; /* Rich gold */
+          --secondary-color: #2c3e50;
+          --text-color: #f8f9fa;
+          --accent-color: #c0c0c0; /* Silver */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Citizen Carz Logo" class="logo" />
+        <h1><a href="index.html">Citizen Carz</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="car-details">
+            <div class="image-gallery">
+                <!-- Car images will go here -->
+            </div>
+            <h2 id="car-title"></h2>
+            <div class="car-info">
+                <p><strong>Make:</strong> <span id="car-make"></span></p>
+                <p><strong>Model:</strong> <span id="car-model"></span></p>
+                <p><strong>Variant:</strong> <span id="car-variant"></span></p>
+                <p><strong>Gearbox:</strong> <span id="car-gearbox"></span></p>
+                <p><strong>Fuel Type:</strong> <span id="car-fuel_type"></span></p>
+                <p><strong>Driven:</strong> <span id="car-driven"></span></p>
+                <p><strong>Year:</strong> <span id="car-year"></span></p>
+                <p><strong>Insurance:</strong> <span id="car-insurance"></span></p>
+                <p><strong>Ownership:</strong> <span id="car-ownership"></span></p>
+                <p><strong>Price:</strong> <span id="car-price"></span></p>
+            </div>
+            <div class="buttons-container">
+                <a href="index.html" class="back-button">Back to Cars</a>
+                <a href="contact.html" class="contact-button">Contact Us</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Follow us on: 
+            <a href="https://www.facebook.com/citizencarz/?checkpoint_src=any" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://www.instagram.com/citizencarz/?igsh=MWJoZGk2ZnVjNTBxbQ%3D%3D" target="_blank">Instagram</a>
+        </p>
+        <p>Contact us: <a href="mailto:haneefsait9966@gmail.com">haneefsait9966@gmail.com<br>7760666666</a></p>
+        <p>&copy; 2024 Citizen Carz. All rights reserved.</p>
+    </footer>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="" alt="Car Image" />
+        </div>
+    </div>
+    <script>
+        // Get query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const make = urlParams.get('make');
+        const model = urlParams.get('model');
+        const variant = urlParams.get('variant');
+
+        const carDetails = document.querySelector('.car-details');
+        const imageGallery = document.querySelector('.image-gallery');
+
+        // Create a new modal for all images
+        const allImagesModal = document.createElement('div');
+        allImagesModal.className = 'modal';
+        allImagesModal.innerHTML = `
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="all-images-gallery"></div>
+            </div>
+        `;
+        document.body.appendChild(allImagesModal);
+
+        const allImagesGallery = allImagesModal.querySelector('.all-images-gallery');
+        const closeAllImagesModal = allImagesModal.querySelector('.close');
+
+        fetch('cars.json')
+            .then(response => response.json())
+            .then(cars => {
+                const car = cars.find(car => car.make === make && car.model === model && car.variant === variant);
+
+                if (car) {
+                    document.getElementById('car-title').textContent = `${car.make} ${car.model}`;
+                    document.getElementById('car-make').textContent = car.make;
+                    document.getElementById('car-model').textContent = car.model;
+                    document.getElementById('car-variant').textContent = car.variant;
+                    document.getElementById('car-price').textContent = car.price;
+                    document.getElementById('car-gearbox').textContent = car.gearbox;
+                    document.getElementById('car-fuel_type').textContent = car.fuel_type;
+                    document.getElementById('car-driven').textContent = car.driven;
+                    document.getElementById('car-year').textContent = car.year;
+                    document.getElementById('car-insurance').textContent = car.insurance;
+                    document.getElementById('car-ownership').textContent = car.ownership;
+                    
+                    // Dynamically add the first three images to the gallery
+                    const imagesToShow = car.imagePaths.slice(0, 3);
+                    imagesToShow.forEach(imagePath => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = imagePath;
+                        imgElement.alt = `${car.make} ${car.model} image`;
+                        imgElement.addEventListener('click', () => {
+                            modal.style.display = 'block';
+                            modalImg.src = imagePath;
+                        });
+                        imageGallery.appendChild(imgElement);
+                    });
+
+                    // Add a blurred fourth image indicator if there are more than three images
+                    if (car.imagePaths.length > 3) {
+                        const blurredImage = document.createElement('img');
+                        blurredImage.src = car.imagePaths[3];
+                        blurredImage.alt = 'More images';
+                        blurredImage.style.filter = 'blur(5px)';
+                        blurredImage.style.cursor = 'pointer';
+                        blurredImage.addEventListener('click', () => {
+                            allImagesModal.style.display = 'block';
+                            // Populate all images in the new modal
+                            allImagesGallery.innerHTML = '';
+                            car.imagePaths.forEach(imagePath => {
+                                const img = document.createElement('img');
+                                img.src = imagePath;
+                                img.alt = `${car.make} ${car.model} image`;
+                                allImagesGallery.appendChild(img);
+                            });
+                        });
+                        imageGallery.appendChild(blurredImage);
+                    }
+                } else {
+                    carDetails.innerHTML = '<p>Car not found.</p>';
+                }
+            });
+
+        // Modal functionality
+        const modal = document.querySelector('.modal');
+        const modalImg = document.querySelector('.modal-content img');
+        const closeModal = document.querySelector('.close');
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        closeAllImagesModal.addEventListener('click', () => {
+            allImagesModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', event => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+            if (event.target === allImagesModal) {
+                allImagesModal.style.display = 'none';
+            }
+        });
+    </script>
+    
+</body>
+</html>

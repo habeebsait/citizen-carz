@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Editor</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #cars-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .delete-button {
+            background-color: #f44336; /* Red */
+            margin-top: 10px;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f; /* Darker Red */
+        }
+        .car-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        #new-car-form input, #new-car-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Car Editor</h1>
+
+<div id="cars-container"></div>
+<button onclick="saveCars()">Save Cars</button>
+
+<h2>Add New Car</h2>
+<div id="new-car-form">
+    <input type="text" id="carDetails" placeholder="Enter details: Make, Model, Variant, Gearbox, Fuel Type, Driven, Year, Insurance, Ownership, Price, NumberPlate" required>
+    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple>
+    <label for="imageUpload">Choose Image (up to 15 images)</label>
+    
+    <button onclick="addCar()">Add Car</button>
+</div>
+
+<script>
+const carsContainer = document.getElementById("cars-container");
+
+async function loadCars() {
+    try {
+        const response = await fetch('/cars');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        displayCars(data);
+    } catch (error) {
+        console.error('Error loading cars:', error);
+        alert("Error loading cars. Please check the server."); // More helpful message
+    }
+}
+
+function displayCars(cars) {
+    if (!Array.isArray(cars) || cars.length === 0) {
+        carsContainer.innerHTML = "<p>No cars found.</p>"; // Display a message when no cars are found
+        return;
+    }
+
+    carsContainer.innerHTML = ""; // Clear previous content
+    const table = document.createElement('table');
+
+    const headerRow = table.insertRow();
+    Object.keys(cars[0]).forEach(key => {
+        // Skip the imagePaths column from displaying
+        if (key !== "imagePaths") {
+            const headerCell = headerRow.insertCell();
+            headerCell.textContent = key;
+        }
+    });
+    const deleteHeaderCell = headerRow.insertCell();
+    deleteHeaderCell.textContent = "Actions";
+
+    cars.forEach((car, index) => {
+        const row = table.insertRow();
+        Object.keys(car).forEach(key => { // Iterate through keys to ensure correct order
+            // Skip the imagePaths column from displaying
+            if (key !== "imagePaths") {
+                const cell = row.insertCell();
+
+                const input = document.createElement("input");
+                input.type = typeof car[key] === 'number' ? 'number' : 'text';
+                input.value = car[key] || ""; // Default to empty string if undefined
+                input.placeholder = key; // Add placeholder attribute
+                cell.appendChild(input);
+            }
+        });
+
+        const deleteCell = row.insertCell();
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-button";
+        deleteButton.onclick = () => deleteCar(index);
+        deleteCell.appendChild(deleteButton);
+
+        // Display the image paths as a list
+        if (Array.isArray(car.imagePaths)) {
+            const imageList = document.createElement('ul'); // Create a list element
+            car.imagePaths.forEach(imagePath => {
+                const listItem = document.createElement('li'); // Create a list item
+                listItem.textContent = imagePath; // Set the text to the image path
+                imageList.appendChild(listItem); // Append the list item to the list
+            });
+            const imageCell = row.insertCell();
+            imageCell.appendChild(imageList); // Append the list to the cell
+        }
+    });
+
+    carsContainer.appendChild(table);
+}
+
+async function addCar() {
+    const carDetails = document.getElementById('carDetails').value.split(',');
+
+    if (carDetails.length !== 11) {
+        alert("Please provide exactly 11 details: Make, Model, Variant, Gearbox, Fuel Type, Driven, Year, Insurance, Ownership, Price, NumberPlate.");
+        return;
+    }
+
+    const newCar = {
+        make: carDetails[0].trim(),
+        model: carDetails[1].trim(),
+        variant: carDetails[2].trim(),
+        gearbox: carDetails[3].trim(),
+        fuel_type: carDetails[4].trim(),
+        driven: carDetails[5].trim(),
+        year: carDetails[6].trim(),
+        insurance: carDetails[7].trim(),
+        ownership: carDetails[8].trim(),
+        price: carDetails[9].trim(),
+        number_plate: carDetails[10].trim()
+    };
+
+    const imageFiles = document.getElementById('imageUpload').files;
+
+    if (imageFiles.length > 0) {
+        try {
+            const formData = new FormData();
+            formData.append('numberPlate', newCar.number_plate); // Include number plate in the form data
+
+            // Append all images to FormData
+            for (let i = 0; i < imageFiles.length; i++) {
+                formData.append('imageUpload', imageFiles[i]);
+            }
+
+            // Upload images
+            const uploadResponse = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!uploadResponse.ok) {
+                throw new Error(`Image upload failed: ${uploadResponse.status}`);
+            }
+
+            const uploadData = await uploadResponse.json();
+            newCar.imagePaths = uploadData.imagePaths; // Store the uploaded image paths in the car data
+
+            // Get existing cars and add new car
+            const carsResponse = await fetch('/cars');
+            const cars = await carsResponse.json();
+            cars.push(newCar);
+
+            // Save updated car list
+            const saveResponse = await fetch('/cars', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cars)
+            });
+
+            if (!saveResponse.ok) {
+                throw new Error(`Failed to save cars: ${saveResponse.status}`);
+            }
+
+            alert("Car added successfully!");
+            window.location.reload(); // Reload the page after success
+
+        } catch (error) {
+            console.error("Error adding car:", error);
+            alert(`Error adding car: ${error.message}`);
+        }
+    } else {
+        alert("Please select images to upload.");
+    }
+}
+
+async function deleteCar(index) {
+    try {
+        const carsResponse = await fetch('/cars');
+        if (!carsResponse.ok) {
+            throw new Error(`Failed to fetch cars: ${carsResponse.status}`);
+        }
+        const cars = await carsResponse.json();
+
+        if (index < 0 || index >= cars.length) {
+            return alert("Invalid car index for deletion.");
+        }
+
+        cars.splice(index, 1); // Remove car at the specified index
+
+        const saveResponse = await fetch('/cars', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cars) // Use updated cars array here
+        });
+
+        if (!saveResponse.ok) {
+            throw new Error(`Failed to save cars after delete: ${saveResponse.status}`);
+        }
+
+        alert("Car deleted successfully!");
+        loadCars();
+
+    } catch (error) {
+        console.error("Error deleting car:", error);
+        alert(`Error deleting car: ${error.message}`);
+    }
+}
+
+async function saveCars() {
+    try {
+        const updatedCars = [];
+        const rows = carsContainer.querySelectorAll('table tr');
+        const originalCarsResponse = await fetch('/cars'); // Fetch original cars to retain image paths
+        const originalCars = await originalCarsResponse.json();
+
+        rows.forEach((row, index) => {
+            if (index === 0) return; // Skip header row
+
+            const car = {};
+            const cells = row.cells;
+            const headerCells = rows[0].cells;
+
+            for (let i = 0; i < headerCells.length - 1; i++) { // -1 to exclude "Actions" column
+                const headerText = headerCells[i].textContent;
+                const input = cells[i].querySelector('input');
+
+                if (input) {
+                    // Update the car property with the input value
+                    car[headerText] = input.value; 
+                } else if (cells[i].querySelector('ul')) {
+                    // If there's a list of images, retain their paths
+                    car[headerText] = Array.from(cells[i].querySelectorAll('li')).map(li => li.textContent);
+                }
+            }
+
+            // Retain imagePaths if it exists in the original data
+            const originalCar = originalCars[index - 1]; // Adjust index for original cars
+            if (originalCar) {
+                car.imagePaths = originalCar.imagePaths; // Preserve existing image paths
+            }
+
+            updatedCars.push(car);
+        });
+
+        const response = await fetch('/cars', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedCars)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        alert("Cars saved successfully!");
+        loadCars();
+
+    } catch (error) {
+        console.error('Error saving cars:', error);
+        alert(`Error saving cars: ${error.message}`);
+    }
+}
+
+
+loadCars();
+</script>
+
+</body>
+</html>

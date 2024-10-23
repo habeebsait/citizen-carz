@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Carz - About Us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #d4af37; /* Rich gold */
+  --secondary-color: #2c3e50;
+  --text-color: #f8f9fa;
+  --background-color: #0a0a0a;
+  --accent-color: #c0c0c0; /* Silver */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(44, 62, 80, 0.9));
+  color: var(--text-color);
+  padding: 10px 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 a {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+header h1 a:hover {
+  color: var(--accent-color);
+}
+
+.logo {
+  width: 120px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.logo:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-right: 30px;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-align: center;
+  margin: 40px 0;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+main {
+    padding: 100px 50px 50px;
+    flex-grow: 1;
+}
+
+.about-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
+h1, h2 {
+    color: #ffcc00;
+    font-weight: 400;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.values-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.value-card {
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
+}
+
+.value-icon {
+    font-size: 48px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #676166;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Additional styling for the extended sections */
+.extended-section {
+    margin: 50px 0;
+}
+
+.extended-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.extended-section p {
+    margin-bottom: 15px;
+}
+    </style>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Citizen Carz Logo" class="logo" />
+        <h1><a href="index.html">Citizen Carz</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section animated">
+            <div class="about-text">
+                <h1>About Citizen Carz</h1>
+                <p>Welcome to Citizen Carz, where passion meets precision in the world of premium pre-owned vehicles. Since our inception in 1998, we've been redefining the car buying experience, one satisfied customer at a time.</p>
+                <p>Our journey began with a simple yet powerful idea: to create a space where car enthusiasts and everyday drivers alike could find their perfect match without compromising on quality or breaking the bank.</p>
+                <p>At Citizen Carz, we believe that everyone deserves to drive a car they love. That's why we meticulously handpick and thoroughly inspect each vehicle in our inventory, ensuring that only the cream of the crop makes it to our showroom floor.</p>
+            </div>
+            <div class="about-image">
+                <img src="/api/placeholder/600/400" alt="Citizen Carz Showroom">
+            </div>
+        </section>
+
+        <section class="values-section animated">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>We rigorously inspect and certify every vehicle to ensure top-notch quality and reliability.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Customer First</h3>
+                    <p>Your satisfaction is our priority. We go above and beyond to exceed your expectations.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Transparency</h3>
+                    <p>We pride ourselves on being transparent about vehicle histories, pricing, and any potential issues, building trust with our customers.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Diversity</h3>
+                    <p>We are dedicated to providing a diverse range of vehicle types and brands to cater to the unique needs and budgets of our customers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Content Section -->
+        <section class="extended-section animated">
+            <h3>Our History</h3
+                <p>Citizen Carz began as a small family business, driven by a shared love for automobiles and a commitment to exceptional customer service. Over the years, we've grown into one of the leading pre-owned car dealerships in the region, maintaining our core values while expanding our offerings to include a wider range of vehicles.</p>
+                <p>Our team is made up of passionate individuals who understand the automotive industry inside and out. We work tirelessly to create a seamless buying experience, from the moment you step into our showroom to the day you drive off in your new car.</p>
+            </section>
+    
+            <section class="extended-section animated">
+                <h3>Our Team</h3>
+                <p>At Citizen Carz, our strength lies in our people. Our team of dedicated professionals brings together years of experience, knowledge, and expertise to assist you every step of the way. We take pride in fostering a culture of collaboration and innovation, ensuring that we are always up-to-date with the latest industry trends and customer preferences.</p>
+                <p>From our sales staff to our service technicians, each member of our team is committed to providing you with the best possible experience. We believe in continuous training and development to ensure that our team is always equipped to meet your needs.</p>
+            </section>
+    
+            <section class="extended-section animated">
+                <h3>Community Engagement</h3>
+                <p>Being a responsible member of the community is a core aspect of our mission at Citizen Carz. We believe in giving back and actively participating in community events, charity drives, and local sponsorships.</p>
+                <p>Our community initiatives include organizing safe driving workshops, supporting local charities, and participating in environmental sustainability programs. We strive to make a positive impact and contribute to the well-being of our community.</p>
+            </section>
+    
+            <section class="extended-section animated">
+                <h3>Customer Testimonials</h3>
+                <p>Don't just take our word for it! Here are some testimonials from our satisfied customers:</p>
+                <blockquote>
+                    <p>"I had an amazing experience at Citizen Carz. The staff was incredibly helpful and patient, and I found the perfect car for my family!" - Jane D.</p>
+                </blockquote>
+                <blockquote>
+                    <p>"Citizen Carz made the buying process so easy. I appreciate their transparency and commitment to quality." - Mike S.</p>
+                </blockquote>
+                <blockquote>
+                    <p>"Highly recommend! They have a great selection of vehicles and the customer service is top-notch." - Sarah K.</p>
+                </blockquote>
+            </section>
+    
+            <section class="extended-section animated">
+                <h3>Future Vision</h3>
+                <p>As we look to the future, Citizen Carz is committed to innovation and excellence. We aim to enhance our customer experience with the latest technology, providing online vehicle viewing, virtual tours, and an even more extensive selection of vehicles.</p>
+                <p>We envision a future where every driver can find their dream car with ease and confidence. Our mission remains the same: to be your trusted partner in the journey of car ownership.</p>
+            </section>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Citizen Carz. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </body>
+    </html>
+    

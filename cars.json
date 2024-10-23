@@ -1,0 +1,103 @@
+[
+  {
+    "make": "Hyundai",
+    "model": "Verna",
+    "variant": "1.0 Turbo SX(O)",
+    "gearbox": "A/T DCT",
+    "fuel_type": "Petrol",
+    "driven": "21000 Kms",
+    "year": "2021",
+    "insurance": "Comprehensive",
+    "ownership": "Second Owner",
+    "price": "13.95 lakhs Nego",
+    "number_plate": "KA 01 MJ 2000",
+    "imagePaths": [
+      "public/uploads/1728235365526-801756480.jpeg",
+      "public/uploads/1728235365529-485071322.jpeg",
+      "public/uploads/1728235365531-913320106.jpeg",
+      "public/uploads/1728235365533-982936076.jpeg",
+      "public/uploads/1728235365535-531814885.jpeg",
+      "public/uploads/1728235365537-498135095.jpeg",
+      "public/uploads/1728235365538-259408439.jpeg",
+      "public/uploads/1728235365539-972493263.jpeg",
+      "public/uploads/1728235365540-543375277.jpeg",
+      "public/uploads/1728235365541-370822451.jpeg",
+      "public/uploads/1728235365542-413052527.jpeg",
+      "public/uploads/1728235365544-298518953.jpeg",
+      "public/uploads/1728235365546-427099381.jpeg",
+      "public/uploads/1728235365547-880331606.jpeg",
+      "public/uploads/1728235365548-277012800.jpeg"
+    ]
+  },
+  
+    {
+      "make": "Hyundai",
+      "model": "Verna",
+      "variant": "1.0 Turbo SX(O)",
+      "gearbox": "A/T DCT",
+      "fuel_type": "Petrol",
+      "driven": "21000 Kms",
+      "year": "2021",
+      "insurance": "Comprehensive",
+      "ownership": "Second Owner",
+      "price": "13.95 lakhs Nego",
+      "number_plate": "KA 01 MJ 2000",
+      "imagePaths": [
+        "https://via.placeholder.com/150/0000FF/808080?text=Car+1",
+        "https://via.placeholder.com/150/FF0000/FFFFFF?text=Car+1"
+      ]
+    },
+    {
+      "make": "Toyota",
+      "model": "Camry",
+      "variant": "Hybrid",
+      "gearbox": "Automatic",
+      "fuel_type": "Hybrid",
+      "driven": "15000 Kms",
+      "year": "2020",
+      "insurance": "Comprehensive",
+      "ownership": "First Owner",
+      "price": "25.00 lakhs Nego",
+      "number_plate": "KA 02 AB 1234",
+      "imagePaths": [
+        "https://via.placeholder.com/150/00FF00/000000?text=Car+2",
+        "https://via.placeholder.com/150/FFFF00/000000?text=Car+2"
+      ]
+    },
+    {
+      "make": "Ford",
+      "model": "Mustang",
+      "variant": "GT",
+      "gearbox": "Manual",
+      "fuel_type": "Petrol",
+      "driven": "5000 Kms",
+      "year": "2019",
+      "insurance": "Third Party",
+      "ownership": "First Owner",
+      "price": "50.00 lakhs Nego",
+      "number_plate": "KA 03 CD 5678",
+      "imagePaths": [
+        "https://via.placeholder.com/150/FF00FF/FFFFFF?text=Car+3",
+        "https://via.placeholder.com/150/00FFFF/000000?text=Car+3"
+      ]
+    },
+    {
+      "make": "Tesla",
+      "model": "Model S",
+      "variant": "Long Range",
+      "gearbox": "Automatic",
+      "fuel_type": "Electric",
+      "driven": "10000 Kms",
+      "year": "2022",
+      "insurance": "Comprehensive",
+      "ownership": "First Owner",
+      "price": "75.00 lakhs Nego",
+      "number_plate": "KA 04 EF 9012",
+      "imagePaths": [
+        "https://via.placeholder.com/150/0000FF/FFFFFF?text=Car+4",
+        "https://via.placeholder.com/150/FF0000/000000?text=Car+4"
+      ]
+    }
+  
+
+]
