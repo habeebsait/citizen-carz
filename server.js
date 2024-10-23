@@ -143,7 +143,7 @@ app.post('/upload', upload.array('imageUpload', 15), (req, res) => {
         }
 
         // Map all uploaded image paths
-        const imagePaths = req.files.map(file => `/uploads/${req.body.numberPlate.replace(/\s+/g, '_')}/${file.filename}`);
+        const imagePaths = req.files.map(file => `/public/${req.body.numberPlate.replace(/\s+/g, '_')}/${file.filename}`);
         res.json({ imagePaths: imagePaths });
     } catch (error) {
         console.error("Error uploading images:", error);
